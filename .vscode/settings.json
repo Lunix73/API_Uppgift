@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "MariaBas",
+            "database": "test17",
+            "username": "linus",
+            "askForPassword": true
+        }
+    ],
+    "liveServer.settings.port": 5501
+}
