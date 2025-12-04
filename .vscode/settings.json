@@ -10,7 +10,7 @@
             "port": 3306,
             "driver": "MariaDB",
             "name": "MariaBas",
-            "database": "test17",
+            "database": "industrial_products",
             "username": "linus",
             "askForPassword": true
         }

@@ -40,12 +40,21 @@ asyncFunction();*/
 
 
 /*var varor;*/
-app.post('/orders', (req, res) => {
-  const { product_id, order_id } = req.body;
-  db.query('INSERT INTO orders (product_id, order_id) VALUES (?, ?)', [product_id, order_id], (err, result) => {
-    if (err) throw err;
-    res.json({ message: 'Order added successfully', id: result.rows[0].id });
-  });
+app.post('/orders', async (req, res) => {
+  //const { product, order } = req.body;
+  console.log(req.body);
+
+  let dbConn;
+  try {
+  dbConn = await db.getConnection();
+  const rows = await dbConn.query(`INSERT INTO orders (product_id, order_id) VALUES (?, ?)`, [req.body.product_id, req.body.order_id]);
+  res.json({ message: 'Order added successfully'});
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  } finally {
+    if (dbConn) dbConn.release();
+  }
 });
 
 app.get('/orders', async (req,res) => {
@@ -61,8 +70,8 @@ app.get('/orders', async (req,res) => {
     if (dbConn) dbConn.release();
   }
 });
-app.listen(3306, () => {
-  console.log(`Server is running on http://localhost:$(PORT)`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 /*const mariadb = require('mariadb');
