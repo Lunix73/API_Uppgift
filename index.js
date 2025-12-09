@@ -1,11 +1,14 @@
 const express = require('express');
 const mariadb = require('mariadb');
+const cors = require('cors')
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 /*const db = mariadb.createPool({
   host: 'localhost',
@@ -41,13 +44,13 @@ asyncFunction();*/
 
 /*var varor;*/
 app.post('/orders', async (req, res) => {
-  //const { product, order } = req.body;
+  const { product_id, order_id } = req.body;
   console.log(req.body);
 
   let dbConn;
   try {
   dbConn = await db.getConnection();
-  const rows = await dbConn.query(`INSERT INTO orders (product_id, order_id) VALUES (?, ?)`, [req.body.product_id, req.body.order_id]);
+  const rows = await dbConn.query(`INSERT INTO orders (product_id, order_id) VALUES (?, ?)`, [product_id, order_id]);
   res.json({ message: 'Order added successfully'});
   } catch (err) {
     console.error(err);

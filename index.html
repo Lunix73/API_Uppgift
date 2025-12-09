@@ -4,17 +4,44 @@
         <meta charset="UTF-8"/>
         <title></title>
 	<link rel="stylesheet" href="styles.css"/>
+    <link rel="shortcut icon" type="image/png" href="/data/debian-logo.png"/>
     </head>
     <body>
         <!--iv src="data/industrial.json"></div>
         <script src="index.js"></script-->
-        <script>
-            fetch('/data/industrial.json')
-  .then(response => response.json())
-  .then(text => console.log(text));
-        </script>
         <p> text </p>
         <form method = 'post' action = 'http://localhost:3000/orders'>
-            
+            <select id="menu" name = "product_id">
+
+            </select>
+                Order number:
+                <input id = 'ordernumber' name = "order_id" type = 'text'></input>
+            <button type="submit">Send order</button>
         </form>
+        <script>
+            let indprod;
+            fetch('/data/industrial.json')
+            .then(response => response.json())
+            .then(text => {indprod = text;console.log(indprod);
+            let meny = document.getElementById('menu');
+            for (let i in indprod){
+                var opt = document.createElement('option');
+                opt.innerText = indprod[i].name + indprod[i].price + indprod[i].description;
+                opt.value = indprod[i].articleNumber;
+                document.getElementById('menu').appendChild(opt);
+            }});
+            let all_orders;
+            fetch('http://localhost:3000/orders', {method: "GET"})
+            .then(response => response.json())
+            .then(text => {all_orders = text;console.log(all_orders);
+                var order_number = 1;
+                for (let i in all_orders) {
+                    if (all_orders[i].order_id >= order_number) {
+                        order_number = parseInt(all_orders[i].order_id) + 1;
+                    }
+                }
+                document.getElementById('ordernumber').value = order_number.toString();
+            });
+
+        </script>
     </body>
