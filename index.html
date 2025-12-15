@@ -7,14 +7,12 @@
     <link rel="shortcut icon" type="image/png" href="/data/debian-logo.png"/>
     </head>
     <body>
-        <!--iv src="data/industrial.json"></div>
-        <script src="index.js"></script-->
-        <p> text </p>
+        <h1> Order our fantastic industrial products! </h1>
         <form method = 'post' action = 'http://localhost:3000/orders'>
             <select id="menu" name = "product_id">
 
             </select>
-                Order number:
+                <p><br>Order number:</p>
                 <input id = 'ordernumber' name = "order_id" type = 'text'></input>
             <button type="submit">Send order</button>
         </form>
@@ -26,7 +24,7 @@
             let meny = document.getElementById('menu');
             for (let i in indprod){
                 var opt = document.createElement('option');
-                opt.innerText = indprod[i].name + indprod[i].price + indprod[i].description;
+                opt.innerText = indprod[i].name + ":  " + indprod[i].price + " $  " + indprod[i].description;
                 opt.value = indprod[i].articleNumber;
                 document.getElementById('menu').appendChild(opt);
             }});

@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+hr {
+    border: 2px solid black;
+}
+body {
+    background-color: #E2725B;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: #e78976;
+}
+
+h1 {
+    padding: 25px 0 0 20px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+  button {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    background-color: green;
+    color: black;
+    border-radius: 5px;
+  }
+
